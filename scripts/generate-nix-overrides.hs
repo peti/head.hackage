@@ -1,4 +1,5 @@
-#! /usr/bin/env runhaskell
+#! /usr/bin/env nix-shell
+#! nix-shell -i runghc -p "haskellPackages.ghcWithPackages (pkgs: with pkgs; [ cabal2nix hopenssl ])"
 
 import qualified Data.ByteString as BS
 import Data.List

@@ -10,8 +10,8 @@ existing Hackage package(s).
   you submit a PR).
 
 - The patches SHOULD work with at least GHC HEAD and the most recent
-  stable released GHC version (currently this means with GHC 8.2.1 and
-  GHC 8.3).
+  stable released GHC version (currently this means with GHC 8.2.2, GHC 8.4.1-alpha, and
+  GHC 8.5).
 
 - The patches SHOULD ideally result in the same code being compiled,
   as one of the main purposes of these patches is to make regression
@@ -49,6 +49,7 @@ allowing to maximise sharing via the nix-style package-db cache store.
 
 ## How to use
 
+
 ### As an add-on remote repository
 
 It is *not* recommended to add the `HEAD.hackage` repository index to
@@ -56,7 +57,7 @@ your global cabal configuration.
 
 Instead, you should mix in the `HEAD.hackage` repository on a
 per-project level. Then the packages in the `HEAD.hackage` will
-overlay those from the main package index, by adding the repository stanza (as shown on http://head.haskell.hackage.org) to the `cabal.project(.local)` file or use `head.hackage.sh init` (see below).
+overlay those from the main package index, by adding the repository stanza (as shown on http://head.hackage.haskell.org) to the `cabal.project(.local)` file or use `head.hackage.sh init` (see below).
 
 To workaround some current issues in `cabal` and make it more
 convenient, the script
@@ -72,6 +73,9 @@ The main operations provided are
 
 - `head.hackage.sh init`: generates a new `cabal.project` file with a `repository` stanza enabling the `HEAD.hackage` repo locally. This command also takes an optional list of arguments which are included as `optional-packages:` declarations in the resulting `cabal.project` file.
 
+- `head.hackage.sh init-local`: generate a `cabal.project.local` file instead.
+
+- `head.hackage.sh dump-repo`: print `repository` stanza to stdout
 
 
 ### As an add-on local repository
@@ -100,3 +104,7 @@ $ cd ..
 ```
 
 TODO: implement script
+
+### Travis CI
+
+The [Travis CI script generator](https://github.com/haskell-hvr/multi-ghc-travis) has recently added support for enabling the `HEAD.hackage` repository automatically for jobs uisng unreleased GHC versions.
